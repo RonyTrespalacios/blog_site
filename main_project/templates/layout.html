@@ -11,6 +11,7 @@
     <nav>
         <ul>
             <li><a href="{% url 'blog:home' %}" title="Página de Inicio">🏠 Inicio</a></li>
+            <li><a href="{% url 'blog:about' %}" title="Acerca de">ℹ️ Acerca de</a></li>
             <li><a href="{% url 'blog:contact' %}" title="Contáctanos">📞 Contacto</a></li>
     
             {% if user.is_authenticated %}
