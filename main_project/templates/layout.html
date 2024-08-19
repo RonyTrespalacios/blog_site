@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'blog:home' %}" title="Página de Inicio">🏠 Inicio</a></li>
+            <li><a href="{% url 'blog:contact' %}" title="Contáctanos">📞 Contacto</a></li>
+    
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'blog:post_create' %}" title="Crear una Nueva Publicación">📝 Nueva Publicación</a></li>
+                <li><a href="{% url 'logout' %}" title="Cerrar Sesión">🚪 Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'blog:login' %}" title="Iniciar Sesión">🔑 Login</a></li>
+                <li><a href="{% url 'blog:register' %}" title="Registrarse">📝 Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>    
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

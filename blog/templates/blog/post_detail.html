@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ post.title }} - Mi Blog
+{% endblock %}
+
+{% block content %}
+    <article class="blog-post-detail">
+        <header>
+            <h1>{{ post.title }}</h1>
+        </header>
+        <section class="blog-post-content markdown-content">
+            {{ content|safe }}  <!-- Renderiza el contenido convertido de Markdown -->
+        </section>
+        <br><br><br>
+        <p><small>Publicado el {{ post.date_posted }} por {{ post.author }}</small></p>
+        
+        {% if post.author == user or user.is_staff %}
+            <footer class="action-buttons">
+                <a href="{% url 'blog:post_update' post.id %}" class="btn btn-primary">Editar</a>
+                <a href="{% url 'blog:post_delete' post.id %}" class="btn btn-danger">Eliminar</a>
+            </footer>
+        {% endif %}
+    </article>
+{% endblock %}

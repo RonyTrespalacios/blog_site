@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ title }} - Mi Blog
+{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_title">Título:</label>
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            <label for="id_content">Contenido:</label>
+            {{ form.content }}
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+{% endblock %}

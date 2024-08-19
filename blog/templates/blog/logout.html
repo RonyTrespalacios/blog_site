@@ -1,0 +1,13 @@
+<!-- templates/blog/logout.html -->
+
+{% extends 'layout.html' %}
+
+{% block title %}
+    Sesión Cerrada
+{% endblock %}
+
+{% block content %}
+    <h1>Has cerrado sesión correctamente</h1>
+    <p>Gracias por visitarnos. ¡Vuelve pronto!</p>
+    <a href="{% url 'blog:home' %}" class="btn btn-primary">Volver al Inicio</a>
+{% endblock %}

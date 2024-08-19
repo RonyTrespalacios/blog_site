@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Inicio - Mi Blog
+{% endblock %}
+
+{% block content %}
+    <h1>Publicaciones Recientes</h1>
+
+    <!-- Formulario para filtrar y ordenar -->
+    <form method="get" action="." class="filter-form">
+        <div class="form-group">
+            <label for="author">Filtrar por autor:</label>
+            <select name="author" id="author">
+                <option value="">Todos</option>
+                {% for user in users %}
+                <option value="{{ user.username }}" {% if request.GET.author == user.username %}selected{% endif %}>
+                    {{ user.username }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="start_date">Desde:</label>
+            <input type="date" name="start_date" id="start_date" value="{{ request.GET.start_date }}">
+        </div>
+
+        <div class="form-group">
+            <label for="end_date">Hasta:</label>
+            <input type="date" name="end_date" id="end_date" value="{{ request.GET.end_date }}">
+        </div>
+
+        <div class="form-group">
+            <label for="order_by">Ordenar por:</label>
+            <select name="order_by" id="order_by">
+                <option value="">Fecha (recientes primero)</option>
+                <option value="date_posted" {% if request.GET.order_by == "date_posted" %}selected{% endif %}>Fecha (antiguos primero)</option>
+                <option value="-author__username" {% if request.GET.order_by == "-author__username" %}selected{% endif %}>Autor (A-Z)</option>
+                <option value="author__username" {% if request.GET.order_by == "author__username" %}selected{% endif %}>Autor (Z-A)</option>
+                <option value="title" {% if request.GET.order_by == "title" %}selected{% endif %}>Título (A-Z)</option>
+                <option value="-title" {% if request.GET.order_by == "-title" %}selected{% endif %}>Título (Z-A)</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-filter">Aplicar filtros</button>
+    </form>
+
+    <ul class="blog-posts">
+        {% for post in posts %}
+        <li class="blog-post">
+            <h2><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></h2>
+            <p>{{ post.content|truncatewords:20 }}</p>
+            <p><small>Publicado el {{ post.date_posted|date:"d M Y, H:i" }} por {{ post.author.username|capfirst }}</small></p>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
