@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,11 +78,11 @@ WSGI_APPLICATION = 'main_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'myproject_db',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'db',
-        'PORT': '5432',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
 
@@ -135,7 +136,7 @@ EMAIL_HOST_USER = 'ronytresspalacios@gmail.com'
 EMAIL_HOST_PASSWORD = 'tu_contraseña'
 
 LOGIN_REDIRECT_URL = 'blog:home'  # Redirige a la página principal después del login
-# LOGOUT_REDIRECT_URL = 'blog:logout'  # Redirige a la página principal después del logout (opcional)
+LOGOUT_REDIRECT_URL = 'blog:logout'  # Redirige a la página principal después del logout (opcional)
 
 
 # Default primary key field type
