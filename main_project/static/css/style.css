@@ -431,8 +431,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     font-size: 16px;
     transition: background-color 0.3s ease;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
@@ -442,8 +440,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 }
 
 .btn-filter{
-    margin-top: 4.75vh;
-    max-height: 4vh;
+    max-height: 6vh;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
